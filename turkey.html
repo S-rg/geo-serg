@@ -1,0 +1,58 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="test.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <div class="ribbon">
+    <div class="ribbon-content">
+      <p class="ribbon-heading">Map</p>
+      <p class="ribbon-item">Turkey</p>
+    </div>
+
+    <div class="ribbon-content">
+      <p class="ribbon-heading">Score</p>
+      <p class="ribbon-item" id="Counter">0/81</p>
+    </div>
+
+    <div class="ribbon-content">
+      <p class="ribbon-heading">Time</p>
+      <p class="ribbon-item" id="Timer">00:00</p>
+    </div>
+
+    <div class="ribbon-content">
+      <p class="ribbon-heading">Distance</p>
+      <p class="ribbon-item" id="Dist">0 km</p>
+    </div>
+  </div>
+
+  <div class="bottom_bar">
+    <button id="prev" class="button">Prev</button>
+    <p id="Name">Adana</p>
+    <button id="next" class="button">Next</button>
+  </div>
+
+  <div class="settings-bar">
+    <button id="settingsButton" class="settings-btn">
+      <img src="https://img.icons8.com/ios-filled/50/000000/settings.png" alt="Settings" />
+    </button>
+    <div id="settingsMenu" class="settings-menu">
+      <ul>
+        <li><button id="easy" class="difficulty-btn">Easy</button></li>
+        <li><button id="medium" class="difficulty-btn">Medium</button></li>
+        <li><button id="hard" class="difficulty-btn">Hard</button></li>
+        <li><button id="custom" class="difficulty-btn">Custom</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="height: 100%" id="wrapper"> 
+    <div id="map" style="width: 100%; height: 100%"></div>
+    <script src="test.js"></script>
+  </div>
+</body>
+</html>
