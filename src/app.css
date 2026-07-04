@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* ── Design tokens ───────────────────────────────────────────────── */
+:root {
+  --ink-deep:         #142D3D;
+  --ink-surface:      #1C3C4E;
+  --ink-surface-2:    #23495D;
+  --paper:            #EFE7D3;
+  --paper-line:       rgba(30,44,51,0.10);
+  --gold:             #CB9B3E;
+  --gold-bright:      #E3BA66;
+  --teal:             #4FA593;
+  --teal-deep:        #2E7D6B;
+  --rust:             #C1543D;
+  --cream:            #F3EEDD;
+  --text-muted-dark:  #9FB6C2;
+  --text-on-paper:    #1E2C33;
+  --text-muted-paper: #5B6B73;
+  --border-hair:      rgba(243,238,221,0.14);
+  --shadow-deep:      0 14px 34px rgba(8,18,26,0.45);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono:    'IBM Plex Mono', SFMono-Regular, Menlo, monospace;
+}
+
+/* ── Globals ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--ink-deep);
+  color: var(--cream);
+  overflow: hidden;
+}
+
+button { font-family: inherit; cursor: pointer; }
+::selection { background: var(--gold); color: var(--ink-deep); }
+
+/* ── Leaflet tooltip ─────────────────────────────────────────────── */
+.leaflet-tooltip.kab-tooltip {
+  background:    var(--ink-deep);
+  color:         var(--cream);
+  border:        1px solid var(--gold);
+  font-family:   var(--font-mono);
+  font-size:     0.78rem;
+  padding:       4px 9px;
+  border-radius: 5px;
+  box-shadow:    var(--shadow-deep);
+}
+.leaflet-tooltip.kab-tooltip::before { border-top-color: var(--gold); }
+
+/* ── Ripple animation ────────────────────────────────────────────── */
+.ripple {
+  position:      absolute;
+  left: 0; top: 0;
+  width: 18px; height: 18px;
+  margin-left: -9px; margin-top: -9px;
+  border-radius: 50%;
+  border:        3px solid var(--gold-bright);
+  animation:     rippleAnim 0.85s ease-out forwards;
+  pointer-events:none;
+}
+.ripple-teal { border-color: var(--teal); }
+.ripple-rust { border-color: var(--rust); }
+
+@keyframes rippleAnim {
+  0%   { transform: scale(0.3); opacity: 0.95; }
+  100% { transform: scale(7.5); opacity: 0; }
+}
+.reduced-motion .ripple { animation-duration: 0.01ms !important; }
+
+.leaflet-interactive:focus {
+  outline: none;
+}
