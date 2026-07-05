@@ -128,7 +128,7 @@
     map = L.map(mapEl, {
       zoomControl: true,
       scrollWheelZoom: true,
-      minZoom: 4,
+      minZoom: 2,
       maxZoom: 13,
       maxBoundsViscosity: 0.6,
     }).setView([-2.5, 117], 5);
