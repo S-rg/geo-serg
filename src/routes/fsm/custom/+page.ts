@@ -1,5 +1,7 @@
 import type { PageLoad } from './$types.js';
 import type { ProvincesData } from '$lib/types.js';
+import { countryResolution } from '$lib';
+import { get } from 'svelte/store';
 
 const PRESETS: Record<string, string[]> = {
     "north-america": ["can", "usa", "mex", "gtm", "blz", "slv", "hnd", "nic", "cri", "pan"],
@@ -31,7 +33,8 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
 
 	const loaded = await Promise.allSettled(
 		countries.map(async (country) => {
-			const res = await fetch(`/data/${country}.json`);
+			const resolution = get(countryResolution);
+			const res = await fetch(`/data/${resolution}/${country}.json`);
 
 			if (!res.ok) {
 				throw new Error(`${country}: ${res.status}`);

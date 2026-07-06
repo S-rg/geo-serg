@@ -1,12 +1,14 @@
 import type { PageLoad } from './$types.js';
 import type { ProvincesData } from '$lib/types.js';
+import { stateResolution } from '$lib';
+import { get } from 'svelte/store';
 
 const PRESETS: Record<string, string[]> = {
 	lesser_sunda: ['bali', 'nusa-tenggara-barat', 'nusa-tenggara-timur'],
-    java: ['banten', 'jakarta', 'jawa-barat', 'jawa-tengah', 'jawa-timur', 'yogyakarta'],
+    java: ['banten', 'dki-jakarta', 'jawa-barat', 'jawa-tengah', 'jawa-timur', 'daerah-istimewa-yogyakarta'],
     sumatra: ['aceh', 'sumatera-utara', 'sumatera-barat', 'riau', 'jambi', 'sumatera-selatan', 'bengkulu', 'lampung', 'kepulauan-riau', 'kepulauan-bangka-belitung'],
     kalimantan: ['kalimantan-barat', 'kalimantan-tengah', 'kalimantan-selatan', 'kalimantan-timur', 'kalimantan-utara'],
-    sulawesi: ['sulawesi-utara', 'sulawesi-tengah', 'sulawesi-selatan', 'sulawesi-tenggara', 'sulawesi-barat'],
+    sulawesi: ['sulawesi-utara', 'sulawesi-tengah', 'sulawesi-selatan', 'sulawesi-tenggara', 'sulawesi-barat', 'gorontalo'],
     maluku: ['maluku', 'maluku-utara'],
     papua: ['papua-barat', 'papua']
 };
@@ -37,7 +39,8 @@ export const load: PageLoad = async ({ params, url, fetch }) => {
 
 	const loaded = await Promise.allSettled(
 		states.map(async (state) => {
-			const res = await fetch(`/data/${country}/${state}.json`);
+			const resolution = get(stateResolution);
+			const res = await fetch(`/data/${country}/${resolution}/${state}.json`);
 
 			if (!res.ok) {
 				throw new Error(`${state}: ${res.status}`);

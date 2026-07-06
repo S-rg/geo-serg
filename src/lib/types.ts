@@ -32,6 +32,12 @@ export type FeedbackClass = 'correct' | 'wrong' | 'skip' | '';
 
 export type RippleVariant = 'gold' | 'teal' | 'rust';
 
+export type StateResolution = 'full' | '250m' | '500m' | '1000m' | '2000m';
+
+export type CountryResolution = 'full' | '500m' | '1000m' | '2000m' | '5000m' | '10000m';
+
+export type CurrentLevel = 'adm1' | 'adm2';
+
 export interface HoverPayload {
   feature:  SubdivisionLayer['feature'];
   layer:    SubdivisionLayer;

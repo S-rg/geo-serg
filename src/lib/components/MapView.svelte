@@ -160,5 +160,5 @@
 </script>
 
 {#if browser}
-  <div bind:this={mapEl} class="absolute inset-0" style="background:var(--paper)"></div>
+  <div bind:this={mapEl} class="absolute inset-0 z-0" style="background:var(--paper)"></div>
 {/if}

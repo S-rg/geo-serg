@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
-import type { AppMode, FeedbackClass, SubdivisionItem, LayersById } from '$lib/types.js';
+import type { AppMode, FeedbackClass, SubdivisionItem, LayersById, StateResolution, CountryResolution, CurrentLevel } from '$lib/types.js';
+import { persistentStore } from './persistentStore';
 
 export const mode = writable<AppMode>('explore');
 export const province = writable<string | null>(null);
@@ -22,3 +23,16 @@ export const wrongThisRound = writable<boolean>(false);
 export const feedbackText  = writable<string>('');
 export const feedbackClass = writable<FeedbackClass>('');
 export const showModal     = writable<boolean>(false);
+
+export const currentLevel = writable<CurrentLevel>('adm1');
+export const parentDivisionName = writable<string | null>(null);
+
+export const stateResolution = persistentStore<StateResolution>(
+  'state-resolution',
+  '500m'
+);
+
+export const countryResolution = persistentStore<CountryResolution>(
+  'country-resolution',
+  '1000m'
+);
