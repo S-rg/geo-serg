@@ -1,6 +1,7 @@
 <script lang="ts">
   import { get } from 'svelte/store';
   import { browser } from '$app/environment';
+  import { onMount, onDestroy } from 'svelte';
 
   import TopBar          from '$lib/components/TopBar.svelte';
   import MapView         from '$lib/components/MapView.svelte';
@@ -256,6 +257,45 @@
       nextTarget();
     }, REDUCED_MOTION ? 150 : 1200);
   }
+
+  const MODES: AppMode[] = ['explore', 'quiz', 'typing'];
+
+  function cycleMode(direction: 1 | -1): void {
+    const currentIndex = MODES.indexOf(modeVal);
+    const nextIndex = (currentIndex + direction + MODES.length) % MODES.length;
+
+    switchMode(MODES[nextIndex]);
+  }
+
+  function isTypingInField(target: EventTarget | null): boolean {
+    const element = target as HTMLElement | null;
+
+    return Boolean(
+      element?.closest('input, textarea, select, [contenteditable="true"]')
+    );
+  }
+
+  function handleKeydown(event: KeyboardEvent): void {
+    if (isTypingInField(event.target)) return;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      cycleMode(1);
+    }
+
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      cycleMode(-1);
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener('keydown', handleKeydown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeydown);
+    };
+  });
 </script>
 
 <svelte:head>
@@ -282,10 +322,7 @@
   {:else}
 
     <TopBar
-      {provinceNames}
-      {selectedProvince}
       activeMode={modeVal}
-      onprovinceChange={loadProvince}
       onmodeChange={switchMode}
     />
 

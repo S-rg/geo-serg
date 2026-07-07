@@ -27,6 +27,8 @@ export const showModal     = writable<boolean>(false);
 export const currentLevel = writable<CurrentLevel>('adm1');
 export const parentDivisionName = writable<string | null>(null);
 
+export const labelsVisible = persistentStore<boolean>('labels-visible', true);
+
 export const stateResolution = persistentStore<StateResolution>(
   'state-resolution',
   '500m'

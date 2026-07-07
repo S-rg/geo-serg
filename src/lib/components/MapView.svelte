@@ -3,7 +3,8 @@
   import { browser } from '$app/environment';
   import { STYLE } from '$lib/utils/mapStyles.js';
   import { REDUCED_MOTION } from '$lib/utils/helpers.js';
-  import { mode, completedIds, layersById } from '$lib/stores/appState.js';
+  import { mode, completedIds, layersById, labelsVisible } from '$lib/stores/appState.js';
+  import { get } from 'svelte/store';
   import type {
     AppMode, ClickPayload, HoverPayload,
     SubdivisionLayer, LayersById, ProvincesData, RippleVariant,
@@ -133,13 +134,19 @@
       maxBoundsViscosity: 0.6,
     }).setView([-2.5, 117], 5);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ' +
-        'contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 19,
-    }).addTo(map);
+    const showLabels = get(labelsVisible);
+
+    L.tileLayer(
+      showLabels
+        ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png',
+      {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+      }
+    ).addTo(map);
 
     _fixUp = (): void => { map.invalidateSize(); refit(); };
     _ro = window.ResizeObserver ? new ResizeObserver(_fixUp) : null;

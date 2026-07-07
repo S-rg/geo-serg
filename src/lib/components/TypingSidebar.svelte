@@ -23,6 +23,15 @@
   let pct       = $derived(total > 0 ? Math.round((foundCount / total) * 100) : 0);
   let allFound  = $derived(total > 0 && foundCount === total);
 
+  const province_name_replacements = {
+    'michoacan de ocampo': 'michoacan',
+    'veracruz de ignacio de la llave': 'veracruz',
+    'coahuila de zaragoza': 'coahuila',
+    'queretaro de arteaga': 'queretaro',
+    'district of columbia': 'washington dc',
+    'commonwealth of the northern mariana islands': 'northern mariana islands',
+  }
+
   function normalize(s: string): string {
     return s
       .normalize('NFD')
@@ -36,6 +45,11 @@
     const norm = normalize(name);
     let stripped = norm.replace(/^(kabupaten|kota|kab\.?)\s+/, '');
     stripped = stripped.replace(/^departamento de\s+/i, '');
+
+    if (stripped in province_name_replacements) {
+      stripped = province_name_replacements[stripped];
+    }
+
     return stripped !== norm ? [norm, stripped] : [norm];
   }
 
@@ -106,7 +120,7 @@
   {#if allFound}
     <div class="px-4 pt-3 pb-3 shrink-0 text-center">
       <div class="text-[0.85rem] font-semibold mb-2.5" style="color:var(--ink-deep);">
-        All names found! 🎉
+      Complete!
       </div>
       <button
         type="button"

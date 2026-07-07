@@ -4,7 +4,8 @@
     countryResolution,
     currentLevel,
     stateResolution,
-    parentDivisionName
+    parentDivisionName,
+    labelsVisible
   } from '$lib';
   import type {
     AppMode,
@@ -106,6 +107,11 @@
 
   function stateResolutionIndex(value: StateResolution) {
     return STATE_RESOLUTIONS.indexOf(value);
+  }
+
+  function toggleLabels() {
+    labelsVisible.set(!$labelsVisible);
+    window.location.reload();
   }
 
   $effect(() => {
@@ -292,6 +298,46 @@
               <span>{STATE_RESOLUTIONS[STATE_RESOLUTIONS.length - 1]}</span>
             </div>
           {/if}
+
+          <div
+            class="mt-4 pt-4 flex items-center justify-between"
+            style="border-top:1px solid var(--border-hair);"
+          >
+            <div>
+              <p
+                class="m-0 text-[0.82rem] font-medium"
+                style="color:var(--cream);"
+              >
+                Map labels
+              </p>
+
+              <p
+                class="m-0 mt-0.5 text-[0.68rem]"
+                style="color:var(--text-muted-dark);"
+              >
+                Show place names and boundaries
+              </p>
+            </div>
+
+            <button
+              type="button"
+              role="switch"
+              aria-checked={$labelsVisible}
+              aria-label="Toggle map labels"
+              class="relative h-6 w-11 rounded-full border-none transition-colors"
+              style={$labelsVisible
+                ? 'background:var(--gold);'
+                : 'background:var(--border-hair);'}
+              onclick={toggleLabels}
+            >
+              <span
+                class="absolute top-0.75 h-4.5 w-4.5 rounded-full transition-transform"
+                style={$labelsVisible
+                  ? 'left:calc(100% - 1.3125rem); background:var(--ink-deep);'
+                  : 'left:0.1875rem; background:var(--cream);'}
+              ></span>
+            </button>
+          </div>
         </div>
       {/if}
     </div>

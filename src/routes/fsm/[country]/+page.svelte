@@ -4,7 +4,7 @@
   import type { PageData } from './$types.js';
   import { currentLevel, parentDivisionName } from '$lib/stores/appState.js';
 
-  currentLevel.set('adm2');
+  currentLevel.set('adm1');
   parentDivisionName.set('world');
   let { data }: { data: PageData } = $props();
 </script>
