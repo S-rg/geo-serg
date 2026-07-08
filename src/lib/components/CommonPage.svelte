@@ -11,6 +11,8 @@
   import QuizBanner      from '$lib/components/QuizBanner.svelte';
   import CompletionModal from '$lib/components/CompletionModal.svelte';
 
+  import type { CommandDef } from '$lib/types.js';
+
   import { STYLE }                                from '$lib/utils/mapStyles.js';
   import { shuffle, displayName, REDUCED_MOTION } from '$lib/utils/helpers.js';
   import {
@@ -24,6 +26,7 @@
     AppMode, ClickPayload, FeedbackClass, HoverPayload,
     SubdivisionItem, SubdivisionLayer, LayersById, ProvincesData,
   } from '$lib/types.js';
+  import { registerCommand } from '$lib/cli/commands';
 
   let { data }: { data: { provinces?: any; loadError?: string } } = $props();
 
@@ -290,11 +293,23 @@
   }
 
   onMount(() => {
-    window.addEventListener('keydown', handleKeydown);
+    registerCommand({
+      name: ['e', 'explore', 'exp'],
+      args: [],
+      handler: () => switchMode('explore'),
+    });
 
-    return () => {
-      window.removeEventListener('keydown', handleKeydown);
-    };
+    registerCommand({
+      name: ['q', 'quiz'],
+      args: [],
+      handler: () => switchMode('quiz'),
+    });
+
+    registerCommand({
+      name: ['t', 'typing'],
+      args: [],
+      handler: () => switchMode('typing'),
+    });
   });
 </script>
 

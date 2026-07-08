@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { registerCommand, unregisterCommand } from '$lib/cli/commands';
+
   import {
     countryResolution,
     currentLevel,
@@ -133,6 +135,61 @@
 
     return () => {
       document.removeEventListener('click', handleDocumentClick);
+    };
+  });
+
+  function normalize(s: string): string {
+    return s.toLowerCase().replace(/[-_\s]+/g, '');
+  }
+
+  function findProvinceRoute(query: string): string | null {
+    const target = normalize(query);
+
+    for (const [name, route] of Object.entries(provinceRoutes)) {
+      const code = route.split('/').filter(Boolean).pop() ?? '';
+      if (normalize(name) === target || normalize(code) === target) {
+        return route;
+      }
+    }
+
+    return null;
+  }
+
+  onMount(() => {
+    function handleDocumentClick(event: MouseEvent) {
+      if (!settingsOpen || !settingsEl) return;
+      if (!settingsEl.contains(event.target as Node)) {
+        settingsOpen = false;
+        window.location.reload();
+      }
+    }
+
+    document.addEventListener('click', handleDocumentClick);
+
+    registerCommand({
+      name: ['switch', 'sw'],
+      args: ['name'],
+      handler: (args) => {
+        if (args.length === 0) {
+          console.warn('Usage: switch <name>');
+          return;
+        }
+
+        const query = args.join(' ');
+        const route = findProvinceRoute(query);
+
+        if (!route) {
+          console.warn(`No match found for "${query}"`);
+          return;
+        }
+
+        window.location.assign(route);
+      },
+    });
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+      unregisterCommand('switch');
     };
   });
 </script>

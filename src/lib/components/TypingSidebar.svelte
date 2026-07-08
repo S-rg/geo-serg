@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SubdivisionItem } from '$lib/types.js';
+  import { onMount } from 'svelte';
 
   interface Props {
     items?:        SubdivisionItem[];
@@ -18,19 +19,53 @@
   let inputEl   = $state<HTMLInputElement | null>(null);
   let typedText = $state('');
 
+  function isOtherFieldFocused(): boolean {
+    const active = document.activeElement as HTMLElement | null;
+    if (!active || active === inputEl) return false;
+    return Boolean(active.closest('input, textarea, select, [contenteditable="true"]'));
+  }
+
+  function handleGlobalKeydown(event: KeyboardEvent): void {
+    const isThisFocused = document.activeElement === inputEl;
+
+    if (isThisFocused) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        inputEl?.blur();
+      }
+      return;
+    }
+
+    if (isOtherFieldFocused()) return;
+
+    if (event.key.toLowerCase() === 'i' && !event.metaKey && !event.ctrlKey && !event.altKey) {
+      event.preventDefault();
+      inputEl?.focus();
+    }
+  }
+
   let total     = $derived(items.length);
   let foundCount = $derived(completedIds.size);
   let pct       = $derived(total > 0 ? Math.round((foundCount / total) * 100) : 0);
   let allFound  = $derived(total > 0 && foundCount === total);
 
-  const province_name_replacements = {
-    'michoacan de ocampo': 'michoacan',
-    'veracruz de ignacio de la llave': 'veracruz',
-    'coahuila de zaragoza': 'coahuila',
-    'queretaro de arteaga': 'queretaro',
-    'district of columbia': 'washington dc',
-    'commonwealth of the northern mariana islands': 'northern mariana islands',
-  }
+  const province_name_replacements = new Map<String, String>([
+    ['michoacan de ocampo', 'michoacan'],
+    ['veracruz de ignacio de la llave', 'veracruz'],
+    ['coahuila de zaragoza', 'coahuila'],
+    ['queretaro de arteaga', 'queretaro'],
+    ['district of columbia', 'washington dc'],
+    ['commonwealth of the northern mariana islands', 'northern mariana islands'],
+  ]);
+
+//   const province_name_replacements = new Map<string, string>([
+//     ['veracruz', 'veracruz de ignacio de la llave'],
+//     ['michoacan', 'michoacán de ocampo'],
+//     ['coahuila', 'coahuila de zaragoza'],
+//     ['queretaro', 'querétaro de arteaga'],
+//     ['washington dc', 'district of columbia'],
+//     ['northern mariana islands', 'commonwealth of the northern mariana islands'],
+// ])
 
   function normalize(s: string): string {
     return s
@@ -46,8 +81,8 @@
     let stripped = norm.replace(/^(kabupaten|kota|kab\.?)\s+/, '');
     stripped = stripped.replace(/^departamento de\s+/i, '');
 
-    if (stripped in province_name_replacements) {
-      stripped = province_name_replacements[stripped];
+    if (province_name_replacements.has(stripped)) {
+      stripped = province_name_replacements.get(stripped) as string;
     }
 
     return stripped !== norm ? [norm, stripped] : [norm];
@@ -66,6 +101,11 @@
       typedText = '';
     }
   }
+
+  onMount(() => {
+    window.addEventListener('keydown', handleGlobalKeydown);
+    return () => window.removeEventListener('keydown', handleGlobalKeydown);
+  });
 
   export function focusInput(): void {
     inputEl?.focus();

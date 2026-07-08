@@ -53,3 +53,14 @@ export interface SidebarHoverPayload {
   id:       string;
   entering: boolean;
 }
+
+export interface ParsedCommand {
+  name: string;
+  args: string[];
+}
+
+export interface CommandDef {
+  name: string[];
+  args?: string[];
+  handler: (args: string[]) => void;
+}

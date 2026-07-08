@@ -19,7 +19,7 @@
   let { onready, onhover, onclick }: Props = $props();
 
   let mapEl = $state<HTMLDivElement>(null!);
-  // Leaflet types — imported dynamically so they never load on the server
+
   let L:         typeof import('leaflet');
   let map:       import('leaflet').Map;
   let layerGroup: import('leaflet').GeoJSON | null = null;
@@ -30,7 +30,6 @@
   mode.subscribe(v => (modeVal = v));
   completedIds.subscribe(v => (completedIdsVal = v));
 
-  /* ── Exported imperative API ────────────────────────────────── */
   export function loadGeoJSON(geojson: ProvincesData[string]): void {
     if (layerGroup) map.removeLayer(layerGroup);
 
