@@ -33,6 +33,7 @@
   let mapView          = $state<ReturnType<typeof MapView> | null>(null);
   let exploreItems     = $state<SubdivisionItem[]>([]);
   let feedbackTimer    = $state<ReturnType<typeof setTimeout> | null>(null);
+  let typingGivenUp    = $state<boolean>(false);
 
   let PROVINCES     = $derived<ProvincesData>(data.provinces ?? {});
   let provinceNames = $derived<string[]>(
@@ -104,6 +105,10 @@
 
   function switchMode(newMode: AppMode): void {
     if (newMode === modeVal) return;
+    if (modeVal === 'typing') {
+      typingGivenUp = false;
+      mapView?.clearMissedLabels();
+    }
     mode.set(newMode);
     mapView?.applyModeStyles();
     if (newMode === 'quiz') startQuizSession();
@@ -139,7 +144,11 @@
       highlightListItem(id, entering);
     } else {
       if (completedIdsVal.has(id)) return;
-      layer.setStyle(entering ? STYLE.quizHover : STYLE.quizDefault);
+      if (typingGivenUp) {
+        layer.setStyle(entering ? STYLE.missedHover : STYLE.missed);
+      } else {
+        layer.setStyle(entering ? STYLE.quizHover : STYLE.quizDefault);
+      }
     }
   }
 
@@ -162,6 +171,8 @@
 
   function startTypingSession(): void {
     completedIds.set(new Set());
+    typingGivenUp = false;
+    mapView?.clearMissedLabels();
     mapView?.applyModeStyles();
   }
 
@@ -173,6 +184,18 @@
       layer.setStyle(STYLE.completed);
       // mapView!.ripple(layer.getBounds().getCenter(), 'teal');
     }
+  }
+
+  function handleTypingGiveUp(): void {
+    typingGivenUp = true;
+    const missedItems: SubdivisionItem[] = [];
+    for (const [id, layer] of Object.entries(layersByIdVal)) {
+      if (!completedIdsVal.has(id)) {
+        layer.setStyle(STYLE.missed);
+        missedItems.push({ id, name: layer.feature.properties.name });
+      }
+    }
+    mapView?.addMissedLabels(missedItems, layersByIdVal);
   }
 
   function startQuizSession(): void {
@@ -360,8 +383,10 @@
           <TypingSidebar
             items={exploreItems}
             completedIds={completedIdsVal}
+            hasGivenUp={typingGivenUp}
             onmatch={handleTypingMatch}
             onrestart={startTypingSession}
+            ongiveup={handleTypingGiveUp}
           />
         {:else}
           <QuizSidebar

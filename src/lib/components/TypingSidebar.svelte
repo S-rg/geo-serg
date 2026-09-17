@@ -5,15 +5,19 @@
   interface Props {
     items?:        SubdivisionItem[];
     completedIds?: Set<string>;
+    hasGivenUp?:   boolean;
     onmatch?:      (item: SubdivisionItem) => void;
     onrestart?:    () => void;
+    ongiveup?:     () => void;
   }
 
   let {
     items        = [],
     completedIds = new Set<string>(),
+    hasGivenUp   = false,
     onmatch,
     onrestart,
+    ongiveup,
   }: Props = $props();
 
   let inputEl   = $state<HTMLInputElement | null>(null);
@@ -149,18 +153,43 @@
       autocorrect="off"
       autocapitalize="off"
       spellcheck="false"
-      disabled={allFound}
-      placeholder={allFound ? 'All done!' : 'Type a name…'}
+      disabled={allFound || hasGivenUp}
+      placeholder={allFound ? 'All done!' : hasGivenUp ? 'Gave up' : 'Type a name…'}
       class="w-full mt-2.5 px-2.5 py-2 rounded-[7px] text-[0.85rem] border"
       style="border-color:rgba(30,44,51,0.18); background:rgba(255,255,255,0.55);
              font-family:var(--font-body); color:var(--text-on-paper);"
     />
+
+    {#if !allFound && !hasGivenUp && foundCount > 0}
+      <button
+        type="button"
+        class="w-full mt-2 rounded-lg px-3 py-2 font-semibold text-[0.82rem] border-[1.5px]"
+        style="background:transparent; border-color:var(--rust); color:var(--rust);"
+        onclick={ongiveup}
+        onmouseenter={(e: MouseEvent) => {
+          const el = e.currentTarget as HTMLButtonElement;
+          el.style.background = 'var(--rust)';
+          el.style.color = 'var(--cream)';
+        }}
+        onmouseleave={(e: MouseEvent) => {
+          const el = e.currentTarget as HTMLButtonElement;
+          el.style.background = 'transparent';
+          el.style.color = 'var(--rust)';
+        }}
+      >
+        Give Up
+      </button>
+    {/if}
   </div>
 
-  {#if allFound}
+  {#if allFound || hasGivenUp}
     <div class="px-4 pt-3 pb-3 shrink-0 text-center">
       <div class="text-[0.85rem] font-semibold mb-2.5" style="color:var(--ink-deep);">
-      Complete!
+        {#if allFound}
+          Complete!
+        {:else}
+          Gave up — {total - foundCount} missed
+        {/if}
       </div>
       <button
         type="button"

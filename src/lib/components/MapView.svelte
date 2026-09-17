@@ -5,9 +5,11 @@
   import { REDUCED_MOTION } from '$lib/utils/helpers.js';
   import { mode, completedIds, layersById, labelsVisible } from '$lib/stores/appState.js';
   import { get } from 'svelte/store';
+  import { PUBLIC_CARTO_API_KEY } from '$env/static/public';
   import type {
     AppMode, ClickPayload, HoverPayload,
     SubdivisionLayer, LayersById, ProvincesData, RippleVariant,
+    SubdivisionItem,
   } from '$lib/types.js';
 
   interface Props {
@@ -23,6 +25,7 @@
   let L:         typeof import('leaflet');
   let map:       import('leaflet').Map;
   let layerGroup: import('leaflet').GeoJSON | null = null;
+  let missedLabelMarkers: import('leaflet').Marker[] = [];
 
   let modeVal         = $state<AppMode>('explore');
   let completedIdsVal = $state<Set<string>>(new Set());
@@ -104,6 +107,30 @@
     setTimeout(() => map.removeLayer(m), REDUCED_MOTION ? 50 : 900);
   }
 
+  export function addMissedLabels(missedItems: SubdivisionItem[], layers: LayersById): void {
+    clearMissedLabels();
+    for (const item of missedItems) {
+      const layer = layers[item.id];
+      if (!layer) continue;
+      const center = layer.getBounds().getCenter();
+      const icon = L.divIcon({
+        className: 'missed-label',
+        html: `<span>${item.name}</span>`,
+        iconSize: [0, 0],
+        iconAnchor: [0, 0],
+      });
+      const marker = L.marker(center, { icon, interactive: false, zIndexOffset: 900 }).addTo(map);
+      missedLabelMarkers.push(marker);
+    }
+  }
+
+  export function clearMissedLabels(): void {
+    for (const m of missedLabelMarkers) {
+      map.removeLayer(m);
+    }
+    missedLabelMarkers = [];
+  }
+
   function baseStyleFor(
     mode: AppMode,
     id: string | undefined,
@@ -126,19 +153,21 @@
     L = await import('leaflet');
 
     map = L.map(mapEl, {
-      zoomControl: true,
+      zoomControl: false,
       scrollWheelZoom: true,
       minZoom: 2,
       maxZoom: 13,
       maxBoundsViscosity: 0.6,
     }).setView([-2.5, 117], 5);
 
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
+
     const showLabels = get(labelsVisible);
 
     L.tileLayer(
       showLabels
-        ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
-        : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png',
+        ? `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=${PUBLIC_CARTO_API_KEY}`
+        : `https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png?key=${PUBLIC_CARTO_API_KEY}`,
       {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',

@@ -8,7 +8,9 @@ export type StyleKey =
   | 'quizHover'
   | 'quizWrong'
   | 'quizReveal'
-  | 'completed';
+  | 'completed'
+  | 'missed'
+  | 'missedHover';
 
 export const STYLE: Record<StyleKey, PathOptions> = {
   exploreDefault: { color: '#CB9B3E', weight: 1.2, fillColor: '#3E6E8E', fillOpacity: 0.32 },
@@ -19,4 +21,6 @@ export const STYLE: Record<StyleKey, PathOptions> = {
   quizWrong:      { color: '#C1543D', weight: 2.4, fillColor: '#C1543D', fillOpacity: 0.65 },
   quizReveal:     { color: '#E3BA66', weight: 2.6, fillColor: '#CB9B3E', fillOpacity: 0.70 },
   completed:      { color: '#5B7A86', weight: 0.6, fillColor: '#2E7D6B', fillOpacity: 0.25 },
+  missed:         { color: '#C1543D', weight: 2,   fillColor: '#C1543D', fillOpacity: 0.45 },
+  missedHover:    { color: '#8B2E1F', weight: 2.4, fillColor: '#8B2E1F', fillOpacity: 0.65 },
 };
