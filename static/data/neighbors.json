@@ -1,0 +1,988 @@
+{
+  "afg": [
+    "chn",
+    "irn",
+    "pak",
+    "tjk",
+    "tkm",
+    "uzb"
+  ],
+  "ago": [
+    "cod",
+    "cog",
+    "nam",
+    "zmb"
+  ],
+  "alb": [
+    "grc",
+    "mkd",
+    "mne",
+    "srb"
+  ],
+  "and": [
+    "esp",
+    "fra"
+  ],
+  "are": [
+    "omn",
+    "sau"
+  ],
+  "arg": [
+    "bol",
+    "bra",
+    "chl",
+    "pry",
+    "ury"
+  ],
+  "arm": [
+    "aze",
+    "geo",
+    "irn",
+    "tur"
+  ],
+  "ata": [],
+  "atg": [],
+  "aus": [],
+  "aut": [
+    "che",
+    "cze",
+    "deu",
+    "hun",
+    "ita",
+    "lie",
+    "svk",
+    "svn"
+  ],
+  "aze": [
+    "arm",
+    "geo",
+    "irn",
+    "rus",
+    "tur"
+  ],
+  "bdi": [
+    "cod",
+    "rwa",
+    "tza"
+  ],
+  "bel": [
+    "deu",
+    "fra",
+    "lux",
+    "nld"
+  ],
+  "ben": [
+    "bfa",
+    "ner",
+    "nga",
+    "tgo"
+  ],
+  "bfa": [
+    "ben",
+    "civ",
+    "gha",
+    "mli",
+    "ner",
+    "tgo"
+  ],
+  "bgd": [
+    "ind",
+    "mmr"
+  ],
+  "bgr": [
+    "grc",
+    "mkd",
+    "rou",
+    "srb",
+    "tur"
+  ],
+  "bhr": [
+    "sau"
+  ],
+  "bhs": [],
+  "bih": [
+    "hrv",
+    "mne",
+    "srb"
+  ],
+  "blr": [
+    "ltu",
+    "lva",
+    "pol",
+    "rus",
+    "ukr"
+  ],
+  "blz": [
+    "gtm",
+    "mex"
+  ],
+  "bol": [
+    "arg",
+    "bra",
+    "chl",
+    "per",
+    "pry"
+  ],
+  "bra": [
+    "arg",
+    "bol",
+    "col",
+    "guy",
+    "per",
+    "pry",
+    "sur",
+    "ury",
+    "ven"
+  ],
+  "brb": [],
+  "brn": [
+    "mys"
+  ],
+  "btn": [
+    "chn",
+    "ind"
+  ],
+  "bwa": [
+    "nam",
+    "zaf",
+    "zmb",
+    "zwe"
+  ],
+  "caf": [
+    "cmr",
+    "cod",
+    "cog",
+    "sdn",
+    "ssd",
+    "tcd"
+  ],
+  "can": [
+    "usa"
+  ],
+  "che": [
+    "aut",
+    "deu",
+    "fra",
+    "ita",
+    "lie"
+  ],
+  "chl": [
+    "arg",
+    "bol",
+    "per"
+  ],
+  "chn": [
+    "afg",
+    "btn",
+    "ind",
+    "kaz",
+    "kgz",
+    "lao",
+    "mmr",
+    "mng",
+    "npl",
+    "pak",
+    "prk",
+    "rus",
+    "tjk",
+    "vnm"
+  ],
+  "civ": [
+    "bfa",
+    "gha",
+    "gin",
+    "lbr",
+    "mli"
+  ],
+  "cmr": [
+    "caf",
+    "cog",
+    "gab",
+    "gnq",
+    "nga",
+    "tcd"
+  ],
+  "cod": [
+    "ago",
+    "bdi",
+    "caf",
+    "cog",
+    "rwa",
+    "ssd",
+    "tza",
+    "uga",
+    "zmb"
+  ],
+  "cog": [
+    "ago",
+    "caf",
+    "cmr",
+    "cod",
+    "gab"
+  ],
+  "col": [
+    "bra",
+    "ecu",
+    "pan",
+    "per",
+    "ven"
+  ],
+  "com": [],
+  "cpv": [],
+  "cri": [
+    "nic",
+    "pan"
+  ],
+  "cub": [],
+  "cyp": [],
+  "cze": [
+    "aut",
+    "deu",
+    "pol",
+    "svk"
+  ],
+  "deu": [
+    "aut",
+    "bel",
+    "che",
+    "cze",
+    "dnk",
+    "fra",
+    "lux",
+    "nld",
+    "pol"
+  ],
+  "dji": [
+    "eri",
+    "eth",
+    "som"
+  ],
+  "dma": [],
+  "dnk": [
+    "deu"
+  ],
+  "dom": [
+    "hti"
+  ],
+  "dza": [
+    "esh",
+    "lby",
+    "mar",
+    "mli",
+    "mrt",
+    "ner",
+    "tun"
+  ],
+  "ecu": [
+    "col",
+    "per"
+  ],
+  "egy": [
+    "isr",
+    "lby",
+    "sdn"
+  ],
+  "eri": [
+    "dji",
+    "eth",
+    "sdn"
+  ],
+  "esh": [
+    "dza",
+    "mar",
+    "mrt"
+  ],
+  "esp": [
+    "and",
+    "fra",
+    "mar",
+    "prt"
+  ],
+  "est": [
+    "fin",
+    "lva",
+    "rus"
+  ],
+  "eth": [
+    "dji",
+    "eri",
+    "ken",
+    "sdn",
+    "som",
+    "ssd"
+  ],
+  "fin": [
+    "est",
+    "nor",
+    "rus",
+    "swe"
+  ],
+  "fji": [],
+  "fra": [
+    "and",
+    "bel",
+    "che",
+    "deu",
+    "esp",
+    "ita",
+    "lux",
+    "mco"
+  ],
+  "fsm": [],
+  "gab": [
+    "cmr",
+    "cog",
+    "gnq"
+  ],
+  "gbr": [
+    "irl"
+  ],
+  "geo": [
+    "arm",
+    "aze",
+    "rus",
+    "tur"
+  ],
+  "gha": [
+    "bfa",
+    "civ",
+    "tgo"
+  ],
+  "gin": [
+    "civ",
+    "gnb",
+    "lbr",
+    "mli",
+    "sen",
+    "sle"
+  ],
+  "gmb": [
+    "sen"
+  ],
+  "gnb": [
+    "gin",
+    "sen"
+  ],
+  "gnq": [
+    "cmr",
+    "gab"
+  ],
+  "grc": [
+    "alb",
+    "bgr",
+    "mkd",
+    "tur"
+  ],
+  "grd": [],
+  "grl": [],
+  "gtm": [
+    "blz",
+    "hnd",
+    "mex",
+    "slv"
+  ],
+  "guy": [
+    "bra",
+    "sur",
+    "ven"
+  ],
+  "hnd": [
+    "gtm",
+    "nic",
+    "slv"
+  ],
+  "hrv": [
+    "bih",
+    "hun",
+    "mne",
+    "srb",
+    "svn"
+  ],
+  "hti": [
+    "dom"
+  ],
+  "hun": [
+    "aut",
+    "hrv",
+    "rou",
+    "srb",
+    "svk",
+    "svn",
+    "ukr"
+  ],
+  "idn": [
+    "mys",
+    "png",
+    "tls"
+  ],
+  "ind": [
+    "bgd",
+    "btn",
+    "chn",
+    "lka",
+    "mmr",
+    "npl",
+    "pak"
+  ],
+  "irl": [
+    "gbr"
+  ],
+  "irn": [
+    "afg",
+    "arm",
+    "aze",
+    "irq",
+    "pak",
+    "tkm",
+    "tur"
+  ],
+  "irq": [
+    "irn",
+    "jor",
+    "kwt",
+    "sau",
+    "syr",
+    "tur"
+  ],
+  "isl": [],
+  "isr": [
+    "egy",
+    "jor",
+    "lbn",
+    "syr"
+  ],
+  "ita": [
+    "aut",
+    "che",
+    "fra",
+    "smr",
+    "svn",
+    "vat"
+  ],
+  "jam": [],
+  "jor": [
+    "irq",
+    "isr",
+    "sau",
+    "syr"
+  ],
+  "jpn": [],
+  "kaz": [
+    "chn",
+    "kgz",
+    "rus",
+    "tkm",
+    "uzb"
+  ],
+  "ken": [
+    "eth",
+    "som",
+    "ssd",
+    "tza",
+    "uga"
+  ],
+  "kgz": [
+    "chn",
+    "kaz",
+    "tjk",
+    "uzb"
+  ],
+  "khm": [
+    "lao",
+    "tha",
+    "vnm"
+  ],
+  "kir": [],
+  "kna": [],
+  "kor": [],
+  "kwt": [
+    "irq",
+    "sau"
+  ],
+  "lao": [
+    "chn",
+    "khm",
+    "mmr",
+    "tha",
+    "vnm"
+  ],
+  "lbn": [
+    "isr",
+    "syr"
+  ],
+  "lbr": [
+    "civ",
+    "gin",
+    "sle"
+  ],
+  "lby": [
+    "dza",
+    "egy",
+    "ner",
+    "sdn",
+    "tcd",
+    "tun"
+  ],
+  "lca": [],
+  "lie": [
+    "aut",
+    "che"
+  ],
+  "lka": [
+    "ind"
+  ],
+  "lso": [
+    "zaf"
+  ],
+  "ltu": [
+    "blr",
+    "lva",
+    "pol",
+    "rus"
+  ],
+  "lux": [
+    "bel",
+    "deu",
+    "fra"
+  ],
+  "lva": [
+    "blr",
+    "est",
+    "ltu",
+    "rus"
+  ],
+  "mar": [
+    "dza",
+    "esh",
+    "esp"
+  ],
+  "mco": [
+    "fra"
+  ],
+  "mda": [
+    "rou",
+    "ukr"
+  ],
+  "mdg": [],
+  "mdv": [],
+  "mex": [
+    "blz",
+    "gtm",
+    "usa"
+  ],
+  "mhl": [],
+  "mkd": [
+    "alb",
+    "bgr",
+    "grc",
+    "srb"
+  ],
+  "mli": [
+    "bfa",
+    "civ",
+    "dza",
+    "gin",
+    "mrt",
+    "ner",
+    "sen"
+  ],
+  "mlt": [],
+  "mmr": [
+    "bgd",
+    "chn",
+    "ind",
+    "lao",
+    "tha"
+  ],
+  "mne": [
+    "alb",
+    "bih",
+    "hrv",
+    "srb"
+  ],
+  "mng": [
+    "chn",
+    "rus"
+  ],
+  "moz": [
+    "mwi",
+    "swz",
+    "tza",
+    "zaf",
+    "zmb",
+    "zwe"
+  ],
+  "mrt": [
+    "dza",
+    "esh",
+    "mli",
+    "sen"
+  ],
+  "mus": [],
+  "mwi": [
+    "moz",
+    "tza",
+    "zmb"
+  ],
+  "mys": [
+    "brn",
+    "idn",
+    "tha"
+  ],
+  "nam": [
+    "ago",
+    "bwa",
+    "zaf",
+    "zmb"
+  ],
+  "ner": [
+    "ben",
+    "bfa",
+    "dza",
+    "lby",
+    "mli",
+    "nga",
+    "tcd"
+  ],
+  "nga": [
+    "ben",
+    "cmr",
+    "ner",
+    "tcd"
+  ],
+  "nic": [
+    "cri",
+    "hnd"
+  ],
+  "nld": [
+    "bel",
+    "deu"
+  ],
+  "nor": [
+    "fin",
+    "rus",
+    "swe"
+  ],
+  "npl": [
+    "chn",
+    "ind"
+  ],
+  "nru": [],
+  "nzl": [],
+  "omn": [
+    "are",
+    "sau",
+    "yem"
+  ],
+  "pak": [
+    "afg",
+    "chn",
+    "ind",
+    "irn"
+  ],
+  "pan": [
+    "col",
+    "cri"
+  ],
+  "per": [
+    "bol",
+    "bra",
+    "chl",
+    "col",
+    "ecu"
+  ],
+  "phl": [],
+  "plw": [],
+  "png": [
+    "idn"
+  ],
+  "pol": [
+    "blr",
+    "cze",
+    "deu",
+    "ltu",
+    "rus",
+    "svk",
+    "ukr"
+  ],
+  "prk": [
+    "chn",
+    "kor",
+    "rus"
+  ],
+  "prt": [
+    "esp"
+  ],
+  "pry": [
+    "arg",
+    "bol",
+    "bra"
+  ],
+  "qat": [
+    "sau"
+  ],
+  "rou": [
+    "bgr",
+    "hun",
+    "mda",
+    "srb",
+    "ukr"
+  ],
+  "rus": [
+    "aze",
+    "blr",
+    "chn",
+    "est",
+    "fin",
+    "geo",
+    "kaz",
+    "ltu",
+    "lva",
+    "mng",
+    "nor",
+    "pol",
+    "prk",
+    "ukr"
+  ],
+  "rwa": [
+    "bdi",
+    "cod",
+    "tza",
+    "uga"
+  ],
+  "sau": [
+    "are",
+    "bhr",
+    "irq",
+    "jor",
+    "kwt",
+    "omn",
+    "qat",
+    "yem"
+  ],
+  "sdn": [
+    "caf",
+    "egy",
+    "eri",
+    "eth",
+    "lby",
+    "ssd",
+    "tcd"
+  ],
+  "sen": [
+    "gin",
+    "gmb",
+    "gnb",
+    "mli",
+    "mrt"
+  ],
+  "sgp": [
+    "mys"
+  ],
+  "slb": [],
+  "sle": [
+    "gin",
+    "lbr"
+  ],
+  "slv": [
+    "gtm",
+    "hnd"
+  ],
+  "smr": [
+    "ita"
+  ],
+  "som": [
+    "dji",
+    "eth",
+    "ken"
+  ],
+  "srb": [
+    "alb",
+    "bgr",
+    "bih",
+    "hrv",
+    "hun",
+    "mkd",
+    "mne",
+    "rou"
+  ],
+  "ssd": [
+    "caf",
+    "cod",
+    "eth",
+    "ken",
+    "sdn",
+    "uga"
+  ],
+  "stp": [],
+  "sur": [
+    "bra",
+    "guy"
+  ],
+  "svk": [
+    "aut",
+    "cze",
+    "hun",
+    "pol",
+    "ukr"
+  ],
+  "svn": [
+    "aut",
+    "hrv",
+    "hun",
+    "ita"
+  ],
+  "swe": [
+    "fin",
+    "nor"
+  ],
+  "swz": [
+    "moz",
+    "zaf"
+  ],
+  "syc": [],
+  "syr": [
+    "irq",
+    "isr",
+    "jor",
+    "lbn",
+    "tur"
+  ],
+  "tcd": [
+    "caf",
+    "cmr",
+    "lby",
+    "ner",
+    "nga",
+    "sdn"
+  ],
+  "tgo": [
+    "ben",
+    "bfa",
+    "gha"
+  ],
+  "tha": [
+    "khm",
+    "lao",
+    "mmr",
+    "mys"
+  ],
+  "tjk": [
+    "afg",
+    "chn",
+    "kgz",
+    "uzb"
+  ],
+  "tkm": [
+    "afg",
+    "irn",
+    "kaz",
+    "uzb"
+  ],
+  "tls": [
+    "idn"
+  ],
+  "ton": [],
+  "tto": [],
+  "tun": [
+    "dza",
+    "lby"
+  ],
+  "tur": [
+    "arm",
+    "aze",
+    "bgr",
+    "geo",
+    "grc",
+    "irn",
+    "irq",
+    "syr"
+  ],
+  "tuv": [],
+  "twn": [],
+  "tza": [
+    "bdi",
+    "cod",
+    "ken",
+    "moz",
+    "mwi",
+    "rwa",
+    "uga",
+    "zmb"
+  ],
+  "uga": [
+    "cod",
+    "ken",
+    "rwa",
+    "ssd",
+    "tza"
+  ],
+  "ukr": [
+    "blr",
+    "hun",
+    "mda",
+    "pol",
+    "rou",
+    "rus",
+    "svk"
+  ],
+  "ury": [
+    "arg",
+    "bra"
+  ],
+  "usa": [
+    "can",
+    "mex"
+  ],
+  "uzb": [
+    "afg",
+    "kaz",
+    "kgz",
+    "tjk",
+    "tkm"
+  ],
+  "vat": [
+    "ita"
+  ],
+  "vct": [],
+  "ven": [
+    "bra",
+    "col",
+    "guy"
+  ],
+  "vnm": [
+    "chn",
+    "khm",
+    "lao"
+  ],
+  "vut": [],
+  "wsm": [],
+  "yem": [
+    "omn",
+    "sau"
+  ],
+  "zaf": [
+    "bwa",
+    "lso",
+    "moz",
+    "nam",
+    "swz",
+    "zwe"
+  ],
+  "zmb": [
+    "ago",
+    "bwa",
+    "cod",
+    "moz",
+    "mwi",
+    "nam",
+    "tza",
+    "zwe"
+  ],
+  "zwe": [
+    "bwa",
+    "moz",
+    "zaf",
+    "zmb"
+  ]
+}

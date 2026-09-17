@@ -3,13 +3,14 @@
   import { browser } from '$app/environment';
   import { onMount, onDestroy } from 'svelte';
 
-  import TopBar          from '$lib/components/TopBar.svelte';
-  import MapView         from '$lib/components/MapView.svelte';
-  import ExploreSidebar  from '$lib/components/ExploreSidebar.svelte';
-  import QuizSidebar     from '$lib/components/QuizSidebar.svelte';
-  import TypingSidebar   from '$lib/components/TypingSidebar.svelte';
-  import QuizBanner      from '$lib/components/QuizBanner.svelte';
-  import CompletionModal from '$lib/components/CompletionModal.svelte';
+  import TopBar              from '$lib/components/TopBar.svelte';
+  import MapView             from '$lib/components/MapView.svelte';
+  import ExploreSidebar      from '$lib/components/ExploreSidebar.svelte';
+  import QuizSidebar         from '$lib/components/QuizSidebar.svelte';
+  import TypingSidebar       from '$lib/components/TypingSidebar.svelte';
+  import QuizBanner          from '$lib/components/QuizBanner.svelte';
+  import CompletionModal     from '$lib/components/CompletionModal.svelte';
+  import TypingCompleteModal from '$lib/components/TypingCompleteModal.svelte';
 
   import type { CommandDef } from '$lib/types.js';
 
@@ -34,6 +35,7 @@
   let exploreItems     = $state<SubdivisionItem[]>([]);
   let feedbackTimer    = $state<ReturnType<typeof setTimeout> | null>(null);
   let typingGivenUp    = $state<boolean>(false);
+  let showTypingModal  = $state<boolean>(false);
 
   let PROVINCES     = $derived<ProvincesData>(data.provinces ?? {});
   let provinceNames = $derived<string[]>(
@@ -107,6 +109,7 @@
     if (newMode === modeVal) return;
     if (modeVal === 'typing') {
       typingGivenUp = false;
+      showTypingModal = false;
       mapView?.clearMissedLabels();
     }
     mode.set(newMode);
@@ -172,6 +175,7 @@
   function startTypingSession(): void {
     completedIds.set(new Set());
     typingGivenUp = false;
+    showTypingModal = false;
     mapView?.clearMissedLabels();
     mapView?.applyModeStyles();
   }
@@ -182,7 +186,10 @@
     completedIds.update(s => new Set(s).add(item.id));
     if (layer) {
       layer.setStyle(STYLE.completed);
-      // mapView!.ripple(layer.getBounds().getCenter(), 'teal');
+    }
+    // Check if all provinces have been found
+    if (completedIdsVal.size >= Object.keys(layersByIdVal).length) {
+      showTypingModal = true;
     }
   }
 
@@ -427,6 +434,14 @@
             bestStreak={bestStreakVal}
             onplayAgain={startQuizSession}
             onclose={() => showModal.set(false)}
+          />
+        {/if}
+
+        {#if showTypingModal}
+          <TypingCompleteModal
+            countryName={provinceVal ?? ''}
+            total={layerTotal}
+            onrestart={startTypingSession}
           />
         {/if}
       </section>

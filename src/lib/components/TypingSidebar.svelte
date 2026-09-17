@@ -182,14 +182,10 @@
     {/if}
   </div>
 
-  {#if allFound || hasGivenUp}
+  {#if hasGivenUp}
     <div class="px-4 pt-3 pb-3 shrink-0 text-center">
       <div class="text-[0.85rem] font-semibold mb-2.5" style="color:var(--ink-deep);">
-        {#if allFound}
-          Complete!
-        {:else}
-          Gave up — {total - foundCount} missed
-        {/if}
+        Gave up — {total - foundCount} missed
       </div>
       <button
         type="button"
