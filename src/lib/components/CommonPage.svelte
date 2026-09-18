@@ -27,7 +27,7 @@
     AppMode, ClickPayload, FeedbackClass, HoverPayload,
     SubdivisionItem, SubdivisionLayer, LayersById, ProvincesData,
   } from '$lib/types.js';
-  import { registerCommand } from '$lib/cli/commands';
+  import { registerCommand, unregisterCommand } from '$lib/cli/commands';
 
   let { data }: { data: { provinces?: any; loadError?: string } } = $props();
 
@@ -194,6 +194,8 @@
   }
 
   function handleTypingGiveUp(): void {
+    if (typingGivenUp) return;
+    if (completedIdsVal.size >= Object.keys(layersByIdVal).length) return;
     typingGivenUp = true;
     const missedItems: SubdivisionItem[] = [];
     for (const [id, layer] of Object.entries(layersByIdVal)) {
@@ -323,23 +325,51 @@
   }
 
   onMount(() => {
-    registerCommand({
-      name: ['e', 'explore', 'exp'],
-      args: [],
-      handler: () => switchMode('explore'),
-    });
+    const cmds: CommandDef[] = [
+      {
+        name: ['e', 'explore', 'exp'],
+        args: [],
+        handler: () => switchMode('explore'),
+      },
+      {
+        name: ['q', 'quiz'],
+        args: [],
+        handler: () => switchMode('quiz'),
+      },
+      {
+        name: ['t', 'typing'],
+        args: [],
+        handler: () => switchMode('typing'),
+      },
+      {
+        name: ['gg', 'gu', 'giveup', 'give-up'],
+        args: [],
+        handler: () => {
+          if (modeVal === 'typing') {
+            handleTypingGiveUp();
+          }
+        },
+      },
+      {
+        name: ['r', 'restart'],
+        args: [],
+        handler: () => {
+          if (modeVal === 'typing') {
+            startTypingSession();
+          }
+        },
+      },
+    ];
 
-    registerCommand({
-      name: ['q', 'quiz'],
-      args: [],
-      handler: () => switchMode('quiz'),
-    });
+    for (const cmd of cmds) {
+      registerCommand(cmd);
+    }
 
-    registerCommand({
-      name: ['t', 'typing'],
-      args: [],
-      handler: () => switchMode('typing'),
-    });
+    return () => {
+      for (const cmd of cmds) {
+        unregisterCommand(cmd);
+      }
+    };
   });
 </script>
 

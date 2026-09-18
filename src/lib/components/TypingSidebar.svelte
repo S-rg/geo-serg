@@ -46,7 +46,19 @@
       event.preventDefault();
       inputEl?.focus();
     }
+
+    if (hasGivenUp && event.key.toLowerCase() === 'r' && !event.metaKey && !event.ctrlKey && !event.altKey) {
+      event.preventDefault();
+      typedText = '';
+      onrestart?.();
+    }
   }
+
+  $effect(() => {
+    if (!hasGivenUp && completedIds.size === 0) {
+      typedText = '';
+    }
+  });
 
   let total     = $derived(items.length);
   let foundCount = $derived(completedIds.size);
@@ -60,6 +72,10 @@
     ['queretaro de arteaga', 'queretaro'],
     ['district of columbia', 'washington dc'],
     ['commonwealth of the northern mariana islands', 'northern mariana islands'],
+    ['jinotega (departamento)', 'jinotega'],
+    ['matagalpa (departemento)', 'matagalpa'],
+    ['north carribean coast autonomous region', 'north carribean coast'],
+    ['south atlantic autonomous region', 'south atlantic'],
   ]);
 
 //   const province_name_replacements = new Map<string, string>([
@@ -191,7 +207,10 @@
         type="button"
         class="w-full rounded-lg px-3 py-2.25 font-semibold text-[0.82rem] border-[1.5px]"
         style="background:transparent; border-color:var(--ink-deep); color:var(--ink-deep);"
-        onclick={onrestart}
+        onclick={() => {
+          typedText = '';
+          onrestart?.();
+        }}
         onmouseenter={(e: MouseEvent) => {
           const el = e.currentTarget as HTMLButtonElement;
           el.style.background = 'var(--ink-deep)';

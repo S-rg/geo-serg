@@ -19,7 +19,7 @@ export function unregisterCommand(cmd: CommandDef | string): void {
 }
 
 export function runCommand(name: string, args: string[]): boolean {
-  const cmd = registry.get(name);
+  const cmd = registry.get(name) ?? registry.get(name.toLowerCase());
   if (!cmd) return false;
   cmd.handler(args);
   return true;
